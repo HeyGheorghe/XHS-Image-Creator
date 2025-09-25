@@ -22,7 +22,7 @@
     ```
     **重要提示：请务必在一个已经打开的 Git Bash (Windows)、WSL 或其他 Bash 兼容终端中执行此脚本。直接双击脚本文件可能导致终端窗口在脚本执行完毕后立即关闭，从而错过重要的提示信息。**
 
-    -   **Windows 用户注意**: 请在 Git Bash、WSL (Windows Subsystem for Linux) 或其他提供 Bash 环境的终端中运行此脚本。
+    -   **Windows 用户注意**: 请在 Git Bash、WSL (Windows Subsystem for Linux) 或其他提供 Bash 环境的终端中运行此脚本。推荐在配置好git环境的前提下在程序目录按住shift+右键开启gitbash并执行setup脚本。
     -   **Node.js**: 脚本会检查 Node.js 和 npm 是否已安装。如果未安装，脚本会提示您安装 Node.js 并提供官方下载链接。
     -   **realpath (macOS)**: 如果您是 macOS 用户且缺少 `realpath` 命令，脚本会尝试通过 Homebrew 安装 `coreutils`。
     -   **Node.js 依赖**: 脚本会自动安装 `package.json` 中定义的所有 Node.js 模块（如 `playwright`, `http-server`）。
@@ -58,7 +58,7 @@ npm start
 ```
 
 ### 2. 运行生成脚本 (Run Generation Script)
-使用 `npm run generate` 命令来批量生成图片。您可以选择提供一个头像图片路径。
+使用 `npm run generate` 命令来批量生成图片。默认在dist目录生成。您可以选择提供一个头像图片路径。
 
 **不带头像图片:**
 ```bash
@@ -67,7 +67,7 @@ npm run generate input.txt
 
 **带头像图片:**
 ```bash
-npm run generate path/to/your/avatar.png input.txt
+npm run generate_image.js path/to/your/avatar.png input.txt
 ```
 支持常见的图片格式，如 `jpeg`, `png`, `jpg`, `gif`。**请注意，`HEIC` 格式图片在浏览器中的支持可能有限，建议您将其转换为 `JPEG` 或 `PNG` 格式后再使用。**
 
