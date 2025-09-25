@@ -51,3 +51,15 @@
         - **渐变铺满问题:** 发现渐变未铺满整张图片。通过调整注入 CSS，使 `cover-section` 绝对定位并填充整个 `page-container`，同时将 `page-container` 的背景设为透明，确保渐变铺满。
         - **头像与标题间距及居中:** 发现头像和标题的垂直居中及间距不符合要求。通过精确计算，使用绝对定位和 `top` 属性调整头像和标题的位置，并使用 `transform: translate(-50%, -50%)` 确保标题精确居中，同时调整 `top` 值以达到用户要求的 2-3 行文字间距。
 - **验证:** 脚本成功运行，首张图片样式符合所有要求。
+
+### 任务 Z：Git 环境清理与文档更新 (Git Environment Cleanup & Documentation Update)
+- **问题:** Git 仓库中存在不应跟踪的文件（如临时文件、缓存），且 `.gitignore` 未能有效工作；用户需要更清晰的 `input.txt` 编写指南。
+- **分析与解决方案:**
+    - **Git 仓库清理:**
+        - 更新 `docs/manual.md`，强调在已打开的终端中运行 `setup.sh`，并澄清 Node.js 检查机制。
+        - 移除不再使用的 `src/generate_image.sh` 脚本。
+        - 鉴于 `.gitignore` 持续不生效的问题，采取了激进措施：删除 `.git` 目录并重新初始化仓库，以确保 `.gitignore` 规则从一开始就正确应用。
+        - 提交了必要的项目文件。
+        - 更新 `.gitignore` 文件，确保正确排除 `node_modules/`, `dist/`, `.gemini/`, `.playwright-mcp/` 等临时和生成文件。
+        - 根据用户需求，将 `image.png` 和 `input.txt` 从 `.gitignore` 中移除并添加到仓库中，作为示例文件。
+- **验证:** Git 仓库现在只包含必要文件，`.gitignore` 规则已正确生效。`image.png` 和 `input.txt` 已作为示例文件被跟踪。
