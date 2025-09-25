@@ -169,6 +169,10 @@ async function generateImages() {
             htmlContent = htmlContent.replace(/<span id="coverAvatarPlaceholder">点击上传头像<\/span>/g, ''); // Remove placeholder text
         }
 
+        const tempHtmlFileDir = path.dirname(tempHtmlFile);
+        if (!fs.existsSync(tempHtmlFileDir)) {
+            fs.mkdirSync(tempHtmlFileDir, { recursive: true });
+        }
         fs.writeFileSync(tempHtmlFile, htmlContent);
 
         console.log(`Generating image for line ${lineNumber}: ${textContent}`);
