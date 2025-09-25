@@ -24,8 +24,7 @@ out/
 temp_*.html # Temporary HTML files
 .gemini/ # Gemini CLI temporary files
 .playwright-mcp/ # Playwright traces and temporary files
-input.txt
-image.png
+
 
 # Backup files
 src/backup/
