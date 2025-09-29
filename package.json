@@ -5,10 +5,12 @@
   "scripts": {
     "start": "http-server -p 8080 .",
     "setup": "npm install",
-    "generate": "node src/generate_image.js"
+    "generate": "node src/generate_image.js",
+    "generate:v2": "node src/generate_image_v2.js --"
   },
   "devDependencies": {
     "http-server": "^14.1.1",
-    "playwright": "^1.44.1"
+    "playwright": "^1.44.1",
+    "nodejieba": "^2.5.2"
   }
 }
