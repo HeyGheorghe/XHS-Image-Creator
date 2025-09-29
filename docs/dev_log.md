@@ -97,3 +97,17 @@
         - 更新 `.gitignore` 文件，确保正确排除 `node_modules/`, `dist/`, `.gemini/`, `.playwright-mcp/` 等临时和生成文件。
         - 根据用户需求，将 `image.png` 和 `input.txt` 从 `.gitignore` 中移除并添加到仓库中，作为示例文件。
 - **验证:** Git 仓库现在只包含必要文件，`.gitignore` 规则已正确生效。`image.png` 和 `input.txt` 已作为示例文件被跟踪。
+
+### 任务 6：修复 Windows 环境依赖问题并重构安装流程 (Fix Windows Dependency Issues & Refactor Setup)
+- **问题:** 用户在 Windows 环境下执行 `./setup.sh` 脚本时，`npm install` 失败。日志分析表明，核心原因是 `nodejieba` 依赖与最新的 Node.js v24 不兼容，且需要用户本地安装 Visual Studio C++ 编译工具链，安装门槛高。
+- **分析与解决方案 (迭代过程):**
+    - **初步方案 (降级 Node.js):** 最初建议用户使用 `nvm-windows` 将 Node.js 降级到 v20 LTS 版本，以匹配 `nodejieba` 的预编译二进制文件。此方案被用户否决，因为它会影响用户的全局 Node.js 环境。
+    - **改进方案 (智能脚本):** 尝试将 `setup.sh` 脚本智能化，使其能自动检查 Node.js 版本并引导用户切换。此方案仍需用户手动切换版本，未达到理想的自动化程度。
+    - **最终方案 (替换核心依赖):**
+        - **依赖替换:** 决定从根本上解决问题，将项目的中文分词依赖从 C++ 驱动的 `nodejieba` 替换为由 Rust 驱动的现代替代品 `@node-rs/jieba`。
+        - **优势:** 新的 `@node-rs/jieba` 库为所有主流平台和最新的 Node.js 版本（包括 v24）提供了预编译二进制文件，彻底移除了对本地 C++ 编译环境和特定 Node.js 版本的依赖。
+        - **代码迁移:** 修改了 `package.json` 以引入新依赖，并无缝更新了 `src/generate_image_v2.js` 中的 `require` 语句，因为两个库的 `tag()` API 兼容。
+    - **安装流程健壮性提升:**
+        - 在测试过程中发现用户的 npm 全局缓存存在权限问题 (`EACCES`)。为避免要求用户执行 `sudo` 命令，修改 `setup.sh` 脚本，在 `npm install` 时增加 `--cache ./.npm-cache` 参数，使用项目本地的临时缓存，绕开了全局缓存的权限问题，显著提升了安装脚本的健壮性和可移植性。
+        - 将新生成的 `.npm-cache` 目录添加到了 `.gitignore` 文件中。
+- **验证:** 在一个全新的 `finaltest/` 目录中成功执行了 `./setup.sh` 和图片生成流程，证明了新方案在无需任何环境妥协的情况下，可在新机器上顺利完成端到端的操作。

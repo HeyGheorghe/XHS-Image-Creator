@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const playwright = require('playwright');
-const jieba = require('nodejieba');
+const jieba = require('@node-rs/jieba');
 
 async function generateImages() {
     // 1. Argument Parsing

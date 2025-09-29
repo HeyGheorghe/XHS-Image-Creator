@@ -11,6 +11,6 @@
   "devDependencies": {
     "http-server": "^14.1.1",
     "playwright": "^1.44.1",
-    "nodejieba": "^2.5.2"
+    "@node-rs/jieba": "^1.9.1"
   }
 }

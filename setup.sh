@@ -31,7 +31,10 @@ else
     echo "✅ Node.js and npm are found."
 fi
 
-# 2. Check for system-specific dependencies (realpath for macOS)
+
+
+
+# 3. Check for system-specific dependencies (realpath for macOS)
 if [[ "$(uname)" == "Darwin" ]]; then
     if ! command -v realpath &> /dev/null; then
         echo "⚠️ Warning: 'realpath' command not found."
@@ -56,9 +59,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     fi
 fi
 
-# 3. Install Node.js dependencies from package.json
-echo "Installing Node.js dependencies (http-server, playwright)..."
-if npm install; then
+# 4. Install Node.js dependencies from package.json
+echo "Installing Node.js dependencies (http-server, playwright, nodejieba)..."
+if npm install --cache ./.npm-cache; then
     echo "✅ Node.js dependencies installed successfully."
     echo "Downloading Playwright browsers..."
     if npx playwright install; then
@@ -75,4 +78,4 @@ else
 fi
 
 echo "🎉 Environment setup complete!"
-echo "You can now run the application using 'npm run generate [AVATAR_IMAGE_PATH] <input_text_file>'."
+echo "You can now run the application using 'npm start' and other scripts."
