@@ -1,4 +1,5 @@
 # Git ignore file
+
 # Operating System files
 .DS_Store
 Thumbs.db
@@ -20,13 +21,14 @@ dist/
 build/
 out/
 
-# Generated files
-temp_*.html # Temporary HTML files
-.gemini/ # Gemini CLI temporary files
-.playwright-mcp/ # Playwright traces and temporary files
-
+# Generated files & Cache
+.gemini/
+.playwright-mcp/
+.npm-cache/
+OneDrive/
 
 # Backup files
+*.bak
 src/backup/
 
 # Other untracked files from status
