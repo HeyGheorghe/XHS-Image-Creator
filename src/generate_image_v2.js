@@ -158,11 +158,17 @@ async function generateImages() {
     const randomGradient = `linear-gradient(135deg, ${color1} 0%, ${color2} 100%)`;
 
     // First page
-    const headerHtml = `
-        <div class="cover-section" style="background: ${randomGradient};">
+    let avatarHtml = '';
+    if (avatarDataUri) {
+        avatarHtml = `
             <div class="avatar-preview">
                 <img src="${avatarDataUri}" alt="Avatar">
-            </div>
+            </div>`;
+    }
+
+    const headerHtml = `
+        <div class="cover-section" style="background: ${randomGradient};">
+            ${avatarHtml}
             <div class="cover-title">${coverTitle}</div>
         </div>`;
 
