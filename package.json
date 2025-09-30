@@ -9,8 +9,8 @@
     "generate:v2": "node src/generate_image_v2.js --"
   },
   "devDependencies": {
+    "@node-rs/jieba": "^1.10.4",
     "http-server": "^14.1.1",
-    "playwright": "^1.44.1",
-    "@node-rs/jieba": "^1.9.1"
+    "playwright": "^1.44.1"
   }
 }

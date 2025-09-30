@@ -108,6 +108,17 @@
         - **优势:** 新的 `@node-rs/jieba` 库为所有主流平台和最新的 Node.js 版本（包括 v24）提供了预编译二进制文件，彻底移除了对本地 C++ 编译环境和特定 Node.js 版本的依赖。
         - **代码迁移:** 修改了 `package.json` 以引入新依赖，并无缝更新了 `src/generate_image_v2.js` 中的 `require` 语句，因为两个库的 `tag()` API 兼容。
     - **安装流程健壮性提升:**
-        - 在测试过程中发现用户的 npm 全局缓存存在权限问题 (`EACCES`)。为避免要求用户执行 `sudo` 命令，修改 `setup.sh` 脚本，在 `npm install` 时增加 `--cache ./.npm-cache` 参数，使用项目本地的临时缓存，绕开了全局缓存的权限问题，显著提升了安装脚本的健壮性和可移植性。
+        - 在测试过程中发现用户的 npm 全局缓存存在权限问题 (`EACCES`)。为避免要求用户执行 `sudo` 命令，修改 `setup.sh` 脚本，在 `npm install` 时增加 `--cache ./.npm-cache` 参数，使用项目本地的临时缓存，绕开了全局缓存的权限问题，显著提升了安装脚本的健justifying性和可移植性。
         - 将新生成的 `.npm-cache` 目录添加到了 `.gitignore` 文件中。
 - **验证:** 在一个全新的 `finaltest/` 目录中成功执行了 `./setup.sh` 和图片生成流程，证明了新方案在无需任何环境妥协的情况下，可在新机器上顺利完成端到端的操作。
+
+### 任务 7：V2 模板布局优化与依赖修复 (V2 Template Layout Optimization & Dependency Fix)
+- **问题:** 用户反馈 V2 版本首图的渐变色块与正文间距过近，且在生成图片时脚本因缺少依赖而失败。
+- **分析与解决方案:**
+    - **布局调整:**
+        - 经过排查，确认应修改 `src/template_v2.html` 文件。
+        - 为 `.cover-section` 样式添加了 `margin-bottom: 40px;` 规则，增加了封面标题区域与下方正文内容的间距，使布局更宽松。
+    - **依赖修复:**
+        - 在执行 `generate_image_v2.js` 脚本时，发现缺少 `@node-rs/jieba` 模块。
+        - 执行 `npm install @node-rs/jieba` 命令，成功安装了缺失的依赖。
+- **验证:** 重新运行 V2 图片生成脚本，成功生成了样式符合要求且布局经过优化的图片。
