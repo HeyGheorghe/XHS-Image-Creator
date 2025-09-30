@@ -57,7 +57,7 @@ npm start
 复杂性：复杂的流程通常更容易出错，需要更多的协调和管理。
 ```
 
-### 2. 运行生成脚本 (V2 - 推荐) (Run Generation Script - V2 - Recommended)
+### 2. 查看生成图片 (View Generated Images)
 使用 `npm run generate:v2` 命令来批量生成图片。此版本基于排版生成长图文，样式更美观，推荐使用。
 
 **核心功能:**
@@ -85,38 +85,24 @@ npm run generate:v2 -- input.txt
 npm run generate:v2 -- path/to/your/avatar.png input.txt
 ```
 
-### 3. 运行生成脚本 (V1 - 旧版) (Run Generation Script - V1 - Legacy)
-使用 `npm run generate` 命令来批量生成图片。此版本为每一行输入文本生成一张独立的图片。
 
-**不带头像图片:**
-```bash
-npm run generate input.txt
-```
-
-**带头像图片:**
-```bash
-npm run generate_image.js path/to/your/avatar.png input.txt
-```
-支持常见的图片格式，如 `jpeg`, `png`, `jpg`, `gif`。**请注意，`HEIC` 格式图片在浏览器中的支持可能有限，建议您将其转换为 `JPEG` 或 `PNG` 格式后再使用。**
-
-### 3. 查看生成图片 (View Generated Images)
 所有生成的图片将保存在 `dist/` 目录下，命名格式为 `output_1.png`, `output_2.png` 等。
 
 ## 自定义 (Customization)
 
 ### 1. 修改图片模板 (Modify Image Template)
-您可以编辑 `src/template.html` 文件来修改图片的视觉样式。
+您可以编辑 `src/template_v2.html` 文件来修改图片的视觉样式。
 - **CSS 样式**: 修改 `<style>` 标签内的 CSS 规则来调整字体、颜色、布局等。
 - **占位符**:
     - `{{COVER_TITLE}}`: 封面标题。
     - `{{TEXT_CONTENT}}`: 图片主体内容。
     - `{{BACK_COVER_TITLE}}`: 封底主标题。
     - `{{BACK_COVER_SUBTITLE}}`: 封底副标题。
-- **头像上传**: 模板支持用户头像上传功能。在浏览器中打开 `src/template.html`，点击头像区域即可上传图片。
-- **随机渐变**: 封面背景的渐变颜色是随机生成的。您可以在 `src/template.html` 的 `<script>` 标签中修改 `getRandomHslColor` 和 `generateRandomGradient` 函数来调整渐变颜色生成逻辑。
+- **头像上传**: 模板支持用户头像上传功能。在浏览器中打开 `src/template_v2.html`，点击头像区域即可上传图片。
+- **随机渐变**: 封面背景的渐变颜色是随机生成的。您可以在 `src/template_v2.html` 的 `<script>` 标签中修改 `getRandomHslColor` 和 `generateRandomGradient` 函数来调整渐变颜色生成逻辑。
 
 ### 2. 修改脚本逻辑 (Modify Script Logic)
-您可以编辑 `src/generate_image.js` 文件来修改图片内容的提取和图片生成逻辑。
+您可以编辑 `src/generate_image_v2.js` 文件来修改图片内容的提取和图片生成逻辑。
 - **标题提取**: 脚本目前从 `TEXT_CONTENT` 的前 20 个字符派生 `COVER_TITLE` 和 `BACK_COVER_TITLE`。您可以修改此逻辑以适应更复杂的标题生成规则。
 - **输出目录/文件名**: 您可以修改 `OUTPUT_DIR` 和 `GENERATED_IMAGE_FILE` 变量来更改输出目录和文件名格式。
 

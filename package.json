@@ -5,7 +5,7 @@
   "scripts": {
     "start": "http-server -p 8080 .",
     "setup": "npm install",
-    "generate": "node src/generate_image.js",
+
     "generate:v2": "node src/generate_image_v2.js --"
   },
   "devDependencies": {
